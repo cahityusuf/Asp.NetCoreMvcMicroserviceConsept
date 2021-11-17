@@ -16,17 +16,3 @@ FROM base AS final
 WORKDIR /app
 COPY --from=build /publish .
 ENTRYPOINT ["dotnet", "Shopping.Client.dll"]
-
-
-#RUN dotnet restore "Shopping.Client/Shopping.Client.csproj"
-#COPY . .
-#WORKDIR "/src/Shopping.Client"
-##RUN dotnet build ./*.csproj -c Release -o /app/build
-##
-#FROM build AS publish
-#RUN dotnet publish -c release ./*.csproj -o /app/publish
-#
-#FROM base AS final
-#WORKDIR /app
-#COPY --from=publish /app/publish .
-#ENTRYPOINT ["dotnet", "Shopping.Client.dll"]
