@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name:  shoppingapi-service
+spec:
+  selector:
+    app:  shoppingapi
+  type:  NodePort
+  ports:
+    - protocol: TCP
+      port:  8000
+      targetPort:  80
+      nodePort: 31000

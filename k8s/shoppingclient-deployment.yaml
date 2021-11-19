@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  shoppingclient-deployment
+  labels:
+    app: shoppingclient
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shoppingclient
+  template:
+    metadata:
+      labels:
+        app:  shoppingclient
+    spec:
+      containers:
+      - image:  cahityusuf/shoppingclient
+        name:  shoppingclient
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: "20m"
+            memory: "55M"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"  
+        env:
+        - name:  ASPNETCORE_ENVIRONMENT
+          value:  Development
+        - name: ShoppingAPIUrl
+          valueFrom:
+            configMapKeyRef:
+              name: shoppingclient-configmap
+              key: shoppingapi_url
+        ports:
+        - containerPort:  80
